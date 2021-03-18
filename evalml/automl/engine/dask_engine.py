@@ -5,7 +5,8 @@ from evalml.automl.engine.engine_base import (
     EngineBase,
     EngineComputation,
     evaluate_pipeline,
-    train_pipeline
+    train_pipeline,
+    score_pipeline
 )
 
 
@@ -74,10 +75,8 @@ class DaskEngine(EngineBase):
         return DaskComputation(dask_future)
 
     def submit_scoring_job(self, automl_data, pipeline, X, y, objectives):
-        def score_pipeline():
-            return pipeline.score(X, y, objectives)
-
-        dask_future = self.client.submit(score_pipeline)
+        dask_future = self.client.submit(score_pipeline, pipeline=pipeline,
+                                         X=X, y=y, objectives=objectives)
         computation = DaskComputation(dask_future)
         computation.meta_data["pipeline_name"] = pipeline.custom_name
         return computation

@@ -2,6 +2,21 @@ Release Notes
 -------------
 **Future Releases**
     * Enhancements
+        * Updated ``AutoMLSearch._check_for_high_variance`` to not emit ``RuntimeWarning`` :pr:`2024`
+        * Added exception when pipeline passed to ``explain_predictions`` is a ``Stacked Ensemble`` pipeline :pr:`2033`
+        * Added sensitivity at low alert rates as an objective :pr:`2001`
+    * Fixes
+        * Fixed bug in where Time Series Classification pipelines were not encoding targets in ``predict`` and ``predict_proba`` :pr:`2040`
+    * Changes
+        * Removed lists as acceptable hyperparameter ranges in ``AutoMLSearch`` :pr:`2028`
+        * Renamed "details" to "metadata" for data check actions :pr:`2008`
+    * Documentation Changes
+        * Catch and suppress warnings in documentation :pr:`1991`
+    * Testing Changes
+
+
+**v0.21.0 Mar. 24, 2021**
+    * Enhancements
         * Changed ``AutoMLSearch`` to default ``optimize_thresholds`` to True :pr:`1943`
         * Added multiple oversampling and undersampling sampling methods as data splitters for imbalanced classification :pr:`1775`
         * Added params to balanced classification data splitters for visibility :pr:`1966`
@@ -9,6 +24,8 @@ Release Notes
         * Updated ``ClassImbalanceDataCheck`` to better handle multiclass imbalances :pr:`1986`
         * Added recommended actions for the output of data check's ``validate`` method :pr:`1968`
         * Added error message for ``partial_dependence`` when features are mostly the same value :pr:`1994`
+        * Updated ``OneHotEncoder`` to drop one redundant feature by default for features with two categories :pr:`1997`
+        * Added a ``PolynomialDetrender`` component :pr:`1992`
     * Fixes
         * Updated binary classification pipelines to use objective decision function during scoring of custom objectives :pr:`1934`
     * Changes
@@ -33,6 +50,7 @@ Release Notes
         * Added a GitHub Action for Detecting dependency changes :pr:`1933`
         * Create a separate CV split to train stacked ensembler on for AutoMLSearch :pr:`1814`
         * Added a GitHub Action for Linux unit tests :pr:`1846`
+        * Added ``ARIMARegressor`` estimator :pr:`1894`
         * Added ``DataCheckAction`` class and ``DataCheckActionCode`` enum :pr:`1896`
         * Updated ``Woodwork`` requirement to ``v0.0.10`` :pr:`1900`
         * Added ``BalancedClassificationDataCVSplit`` and ``BalancedClassificationDataTVSplit`` to AutoMLSearch :pr:`1875`
